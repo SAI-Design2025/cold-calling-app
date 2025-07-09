@@ -157,7 +157,8 @@
                 const company = await response.json();
                 
                 if (company.error) {
-                    alert('🎉 All companies have been called! Great job!');
+                    // Show blank card instead of alert
+                    displayBlankCard();
                     return;
                 }
                 
@@ -177,6 +178,20 @@
             document.getElementById('tier').textContent = company.tier || 'Tier 3';
             document.getElementById('website-status').textContent = company.website_status || 'Basic';
             document.getElementById('seo-status').textContent = company.seo_status || 'None';
+            
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('company-card').classList.remove('hidden');
+        }
+
+        function displayBlankCard() {
+            document.getElementById('business-name').textContent = 'No more companies to call';
+            document.getElementById('phone-link').textContent = 'All done!';
+            document.getElementById('phone-link').href = '#';
+            document.getElementById('tier').textContent = '-';
+            document.getElementById('website-status').textContent = '-';
+            document.getElementById('seo-status').textContent = '-';
+            
+            currentCompany = null;
             
             document.getElementById('loading').classList.add('hidden');
             document.getElementById('company-card').classList.remove('hidden');
